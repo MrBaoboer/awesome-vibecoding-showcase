@@ -64,6 +64,29 @@ def _form_labels(document: str) -> set[str]:
 def validate_repository() -> list[str]:
     errors: list[str] = []
 
+    for license_path in ("LICENSE", "LICENSING.md", "CONTENT-LICENSING.md"):
+        if not (ROOT / license_path).is_file():
+            errors.append(f"required licensing file is missing: {license_path}")
+    for legacy_path in ("LICENSE-CODE", "LICENSE-CONTENT"):
+        if (ROOT / legacy_path).exists():
+            errors.append(
+                f"legacy {legacy_path} must be removed; LICENSE-* files cause GitHub "
+                "to report an unknown multi-license result"
+            )
+    mit_license = read("LICENSE") if (ROOT / "LICENSE").is_file() else ""
+    for required_text in (
+        "MIT License",
+        "Permission is hereby granted, free of charge",
+        'THE SOFTWARE IS PROVIDED "AS IS"',
+    ):
+        if required_text not in mit_license:
+            errors.append(f"root LICENSE is missing standard MIT text: {required_text!r}")
+    for readme_path in ("README.md", "README.en.md"):
+        readme = read(readme_path)
+        for target in ("LICENSE", "LICENSING.md", "CONTENT-LICENSING.md"):
+            if f"({target})" not in readme:
+                errors.append(f"{readme_path} must link to {target}")
+
     catalog = json.loads(read("data/projects.json"))
     primary_ids = [category["id"] for category in catalog["categories"]]
     category_pairs = [
