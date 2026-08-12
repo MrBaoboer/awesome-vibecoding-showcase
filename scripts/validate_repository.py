@@ -64,6 +64,20 @@ def _form_labels(document: str) -> set[str]:
 def validate_repository() -> list[str]:
     errors: list[str] = []
 
+    if (ROOT / "LICENSE").exists():
+        errors.append(
+            "root LICENSE must not contain the dual-license explanation; "
+            "use LICENSING.md so GitHub does not report an unknown third license"
+        )
+    for license_path in ("LICENSING.md", "LICENSE-CODE", "LICENSE-CONTENT"):
+        if not (ROOT / license_path).is_file():
+            errors.append(f"required licensing file is missing: {license_path}")
+    for readme_path in ("README.md", "README.en.md"):
+        readme = read(readme_path)
+        for target in ("LICENSING.md", "LICENSE-CODE", "LICENSE-CONTENT"):
+            if f"({target})" not in readme:
+                errors.append(f"{readme_path} must link to {target}")
+
     catalog = json.loads(read("data/projects.json"))
     primary_ids = [category["id"] for category in catalog["categories"]]
     category_pairs = [

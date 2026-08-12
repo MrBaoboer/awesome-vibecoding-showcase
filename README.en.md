@@ -107,4 +107,4 @@ Contributions can fix broken links, improve bilingual copy, add verifiable evide
 - validation scripts and GitHub automation: [`MIT`](LICENSE-CODE);
 - `CODE_OF_CONDUCT*`: `CC BY-SA 4.0`, following Contributor Covenant 3.0.
 
-See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE) for path boundaries and third-party notices. Listed projects retain their own repository licenses; public source does not automatically grant reuse rights.
+See [`LICENSING.md`](LICENSING.md) and [`NOTICE`](NOTICE) for path boundaries and third-party notices. Listed projects retain their own repository licenses; public source does not automatically grant reuse rights.

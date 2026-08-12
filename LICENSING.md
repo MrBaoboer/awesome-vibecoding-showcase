@@ -1,5 +1,9 @@
 # Licensing / 许可说明
 
+This file explains the repository's path-specific licensing. The standard license texts remain in `LICENSE-CODE` and `LICENSE-CONTENT`; this explanatory file is intentionally named `LICENSING.md` so automated license detection does not mistake it for a third license.
+
+本文件说明仓库中不同路径适用的许可证。标准许可证文本保留在 `LICENSE-CODE` 与 `LICENSE-CONTENT`；本说明特意命名为 `LICENSING.md`，避免自动识别工具将其误判为第三种许可证。
+
 Unless a file or directory states otherwise, this repository uses separate licenses for code and content:
 
 1. Source code, scripts, configuration, schemas, and automation are licensed under the MIT License. See LICENSE-CODE.

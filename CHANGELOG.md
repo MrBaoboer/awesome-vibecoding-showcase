@@ -11,6 +11,10 @@ All notable repository, policy, and catalog changes are recorded here. Project a
 - Structured catalog, validation, rendering, link checking, and contribution workflows.
 - Governance, security, conduct, category, review, operations, and licensing documents.
 
+### Fixed
+
+- Moved the dual-license explanation to `LICENSING.md` so GitHub no longer reports it as an unknown third license.
+
 ## [0.1.0] - 2026-08-12
 
 ### Added

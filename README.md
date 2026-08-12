@@ -107,4 +107,4 @@ _暂无收录项目。_
 - 校验脚本与 GitHub 自动化：[`MIT`](LICENSE-CODE)；
 - `CODE_OF_CONDUCT*`：`CC BY-SA 4.0`，沿用 Contributor Covenant 3.0 的授权。
 
-路径边界和第三方材料说明见 [`LICENSE`](LICENSE) 与 [`NOTICE`](NOTICE)。被收录项目仍使用其各自仓库声明的许可证；“源码公开”不等于可任意复用。
+路径边界和第三方材料说明见 [`LICENSING.md`](LICENSING.md) 与 [`NOTICE`](NOTICE)。被收录项目仍使用其各自仓库声明的许可证；“源码公开”不等于可任意复用。

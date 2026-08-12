@@ -41,7 +41,7 @@
 ## DD-007：内容与代码分开授权
 
 - 状态：Accepted
-- 决策：说明和项目元数据采用 CC BY 4.0；脚本和自动化采用 MIT；行为准则保留 Contributor Covenant 的 CC BY-SA 4.0。
+- 决策：说明和项目元数据采用 CC BY 4.0；脚本和自动化采用 MIT；行为准则保留 Contributor Covenant 的 CC BY-SA 4.0。标准文本分别保存在 `LICENSE-CONTENT` 与 `LICENSE-CODE`，路径边界由 `LICENSING.md` 说明；不使用自定义根 `LICENSE`，避免 GitHub 将说明文字误判为第三个未知许可证。
 - 原因：内容复用需要署名，工程代码应易于被其他社区复用，同时尊重上游文本授权。
 
 ## 修改方式
