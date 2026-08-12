@@ -26,14 +26,13 @@ DEFAULT_EN_README = ROOT / "README.en.md"
 LOCALE_CONFIG = {
     "zh-CN": {
         "empty": "_暂无收录项目。_",
-        "problem": "解决的问题（D1）",
-        "features": "核心功能（D2）",
-        "value": "实际价值（C4 / D2）",
-        "stack": "主要技术栈（D3）",
-        "ai": "AI 开发角色（C3 / D4）",
-        "quality": "完成度与质量证据（C4）",
-        "links": "公开地址（C1 / C2 / D5）",
-        "verify": "真实性核验（C5）",
+        "problem": "解决的问题",
+        "features": "核心功能与价值",
+        "stack": "主要技术栈",
+        "ai": "AI 参与",
+        "quality": "质量依据",
+        "links": "公开地址",
+        "verify": "核验",
         "added": "收录日期",
         "demo": "在线体验",
         "source": "源码仓库",
@@ -48,15 +47,14 @@ LOCALE_CONFIG = {
     },
     "en": {
         "empty": "_No projects have been listed yet._",
-        "problem": "Problem (D1)",
-        "features": "Core features (D2)",
-        "value": "Practical value (C4 / D2)",
-        "stack": "Main stack (D3)",
-        "ai": "AI development role (C3 / D4)",
-        "quality": "Completion and quality evidence (C4)",
-        "links": "Public links (C1 / C2 / D5)",
-        "verify": "Verification (C5)",
-        "added": "Listed on",
+        "problem": "Problem",
+        "features": "Core features and value",
+        "stack": "Main stack",
+        "ai": "AI involvement",
+        "quality": "Quality evidence",
+        "links": "Public links",
+        "verify": "Verification",
+        "added": "listed on",
         "demo": "Live demo",
         "source": "Source repository",
         "ai_evidence": "AI evidence",
@@ -87,18 +85,6 @@ def _inline(value: str) -> str:
     return re.sub(r"([\\`*_\[\]<>|])", r"\\\1", compact)
 
 
-def _block_text(value: str) -> str:
-    """Escape Markdown constructs when catalog text occupies its own line."""
-    safe = _inline(value)
-    if re.match(r"^(?:#{1,6}|[-+])(?:\s|$)", safe):
-        return "\\" + safe
-    if re.fullmatch(r"(?:-\s*){3,}", safe):
-        return "\\" + safe
-    if re.match(r"^~{3,}", safe) or re.fullmatch(r"={3,}", safe):
-        return "\\" + safe
-    return re.sub(r"^(\d+)([.)])(\s)", r"\1\\\2\3", safe)
-
-
 def _code_span(value: str) -> str:
     compact = " ".join(value.split())
     runs = [len(match.group(0)) for match in re.finditer(r"`+", compact)]
@@ -123,12 +109,19 @@ def _localized(value: dict[str, str], locale: str) -> str:
     return _inline(value[locale])
 
 
+def _clause(value: dict[str, str], locale: str) -> str:
+    """Render text that will be followed by a list separator."""
+    return _localized(value, locale).rstrip("。！？；.!?;")
+
+
 def _render_project(project: dict[str, Any], locale: str) -> list[str]:
     labels = LOCALE_CONFIG[locale]
     separator = labels["separator"]
     features = separator.join(
-        _localized(feature, locale) for feature in project["features"]
+        _clause(feature, locale) for feature in project["features"]
     )
+    value = _clause(project["value"], locale)
+    workflow = _clause(project["ai_role"]["workflow"], locale)
     stack = ", ".join(_code_span(item) for item in project["tech_stack"])
     tools = ", ".join(_code_span(item) for item in project["ai_role"]["tools"])
     depth = _inline(DEPTH_LABELS[project["ai_role"]["depth"]][locale])
@@ -156,43 +149,37 @@ def _render_project(project: dict[str, Any], locale: str) -> list[str]:
         f"<!-- project:{project['id']} -->",
         f"##### {_localized(project['name'], locale)}",
         "",
+        f"- **{labels['links']}：** {public_links}"
+        if locale == "zh-CN"
+        else f"- **{labels['links']}:** {public_links}",
         f"- **{labels['problem']}：** {_localized(project['problem'], locale)}"
         if locale == "zh-CN"
         else f"- **{labels['problem']}:** {_localized(project['problem'], locale)}",
-        f"- **{labels['features']}：** {features}"
+        f"- **{labels['features']}：** {features}；{value}"
         if locale == "zh-CN"
-        else f"- **{labels['features']}:** {features}",
-        f"- **{labels['value']}：** {_localized(project['value'], locale)}"
-        if locale == "zh-CN"
-        else f"- **{labels['value']}:** {_localized(project['value'], locale)}",
+        else f"- **{labels['features']}:** {features}; {value}",
         f"- **{labels['stack']}：** {stack}"
         if locale == "zh-CN"
         else f"- **{labels['stack']}:** {stack}",
         (
             f"- **{labels['ai']}：** {labels['tools']}：{tools}；"
             f"{labels['depth']}：{depth}；{labels['workflow']}："
-            f"{_localized(project['ai_role']['workflow'], locale)}；{evidence}"
+            f"{workflow}；{evidence}"
             if locale == "zh-CN"
             else f"- **{labels['ai']}:** {labels['tools']}: {tools}; "
             f"{labels['depth']}: {depth}; {labels['workflow']}: "
-            f"{_localized(project['ai_role']['workflow'], locale)}; {evidence}"
+            f"{workflow}; {evidence}"
         ),
         f"- **{labels['quality']}：** {_localized(project['quality_evidence'], locale)}"
         if locale == "zh-CN"
         else f"- **{labels['quality']}:** {_localized(project['quality_evidence'], locale)}",
-        f"- **{labels['links']}：** {public_links}"
-        if locale == "zh-CN"
-        else f"- **{labels['links']}:** {public_links}",
         (
             f"- **{labels['verify']}：** {verification_links} · {review_issue}；"
-            f"{labels['verified_on']} {verified_on}"
+            f"{labels['verified_on']} {verified_on}；{labels['added']} {_inline(project['added_on'])}"
             if locale == "zh-CN"
             else f"- **{labels['verify']}:** {verification_links} · {review_issue}; "
-            f"{labels['verified_on']} {verified_on}"
+            f"{labels['verified_on']} {verified_on}; {labels['added']} {_inline(project['added_on'])}"
         ),
-        f"- **{labels['added']}：** {_inline(project['added_on'])}"
-        if locale == "zh-CN"
-        else f"- **{labels['added']}:** {_inline(project['added_on'])}",
     ]
 
 
@@ -216,8 +203,6 @@ def render_catalog(data: dict[str, Any], locale: str) -> str:
         lines.extend(
             (
                 f"### {_localized(category['name'], locale)}",
-                "",
-                _block_text(category["description"][locale]),
             )
         )
 
@@ -233,8 +218,6 @@ def render_catalog(data: dict[str, Any], locale: str) -> str:
                 (
                     "",
                     f"#### {_localized(subcategory['name'], locale)}",
-                    "",
-                    _block_text(subcategory["description"][locale]),
                 )
             )
             for project in subcategory_projects:

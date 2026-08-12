@@ -16,7 +16,6 @@ REQUIREMENTS = tuple(f"C{index}" for index in range(1, 6)) + tuple(
 STATUS_LABELS = {
     "status: triage",
     "status: needs-info",
-    "status: in-review",
     "status: approved",
     "status: listed",
     "status: declined",
@@ -36,20 +35,6 @@ def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
-def _form_block(document: str, field_id: str) -> str:
-    match = re.search(
-        rf"^  - type: [^\n]+\n    id: {re.escape(field_id)}\n"
-        rf"(?P<body>.*?)(?=^  - type: |\Z)",
-        document,
-        flags=re.MULTILINE | re.DOTALL,
-    )
-    return match.group("body") if match else ""
-
-
-def _quoted_options(block: str) -> list[str]:
-    return re.findall(r'^\s+- "([^"]+)"\s*$', block, flags=re.MULTILINE)
-
-
 def _form_labels(document: str) -> set[str]:
     match = re.search(
         r"^labels:\s*\n(?P<labels>(?:  - [^\n]+\n)+)",
@@ -64,7 +49,12 @@ def _form_labels(document: str) -> set[str]:
 def validate_repository() -> list[str]:
     errors: list[str] = []
 
-    for license_path in ("LICENSE", "LICENSING.md", "CONTENT-LICENSING.md"):
+    for license_path in (
+        "LICENSE",
+        "LICENSING.md",
+        "LICENSING.en.md",
+        "CONTENT-LICENSING.md",
+    ):
         if not (ROOT / license_path).is_file():
             errors.append(f"required licensing file is missing: {license_path}")
     for legacy_path in ("LICENSE-CODE", "LICENSE-CONTENT"):
@@ -81,9 +71,13 @@ def validate_repository() -> list[str]:
     ):
         if required_text not in mit_license:
             errors.append(f"root LICENSE is missing standard MIT text: {required_text!r}")
-    for readme_path in ("README.md", "README.en.md"):
+    readme_license_targets = {
+        "README.md": ("LICENSE", "LICENSING.md", "CONTENT-LICENSING.md"),
+        "README.en.md": ("LICENSE", "LICENSING.en.md", "CONTENT-LICENSING.md"),
+    }
+    for readme_path, targets in readme_license_targets.items():
         readme = read(readme_path)
-        for target in ("LICENSE", "LICENSING.md", "CONTENT-LICENSING.md"):
+        for target in targets:
             if f"({target})" not in readme:
                 errors.append(f"{readme_path} must link to {target}")
 
@@ -95,37 +89,29 @@ def validate_repository() -> list[str]:
         for subcategory in category["subcategories"]
     ]
 
-    submission = read(".github/ISSUE_TEMPLATE/project-submission.yml")
-    submission_name_match = re.search(r'^name: "([^"]+)"$', submission, re.MULTILINE)
-    submission_name = submission_name_match.group(1) if submission_name_match else ""
+    submission_url = (
+        "https://github.com/MrBaoboer/Awesome-VibeCoding-Showcase/"
+        "issues/new?template=project-submission.yml"
+    )
     for readme_path in ("README.md", "README.en.md"):
-        if f"**{submission_name}**" not in read(readme_path):
+        if submission_url not in read(readme_path):
             errors.append(
-                f"{readme_path} must use the exact project Issue Form name {submission_name!r}"
+                f"{readme_path} must link directly to the project submission form"
             )
-    form_pairs = _quoted_options(_form_block(submission, "category_pair"))
-    if form_pairs != category_pairs:
-        errors.append("project submission secondary categories differ from catalog order")
 
-    category_doc = read("docs/CATEGORIES.md")
-    zh_readme = read("README.md")
-    en_readme = read("README.en.md")
-    for category_id in primary_ids:
-        if f"`{category_id}`" not in category_doc:
-            errors.append(f"docs/CATEGORIES.md is missing primary category {category_id}")
-    for category in catalog["categories"]:
-        if category["name"]["zh-CN"] not in zh_readme:
-            errors.append(
-                f"README.md is missing category name {category['name']['zh-CN']!r}"
-            )
-        if category["name"]["en"] not in en_readme:
-            errors.append(
-                f"README.en.md is missing category name {category['name']['en']!r}"
-            )
-    for pair in category_pairs:
-        secondary_id = pair.split(" / ", 1)[1]
-        if f"`{secondary_id}`" not in category_doc:
-            errors.append(f"docs/CATEGORIES.md is missing secondary category {secondary_id}")
+    for category_doc_path in ("docs/CATEGORIES.md", "docs/CATEGORIES.en.md"):
+        category_doc = read(category_doc_path)
+        for category_id in primary_ids:
+            if f"`{category_id}`" not in category_doc:
+                errors.append(
+                    f"{category_doc_path} is missing primary category {category_id}"
+                )
+        for pair in category_pairs:
+            secondary_id = pair.split(" / ", 1)[1]
+            if f"`{secondary_id}`" not in category_doc:
+                errors.append(
+                    f"{category_doc_path} is missing secondary category {secondary_id}"
+                )
 
     labels_text = read(".github/labels.yml")
     declared_labels = set(
@@ -165,6 +151,7 @@ def validate_repository() -> list[str]:
         "CONTRIBUTING.md",
         "CONTRIBUTING.en.md",
         "GOVERNANCE.md",
+        "GOVERNANCE.en.md",
         "docs/REVIEW_CHECKLIST.md",
         ".github/ISSUE_TEMPLATE/project-submission.yml",
         ".github/ISSUE_TEMPLATE/general-issue.yml",

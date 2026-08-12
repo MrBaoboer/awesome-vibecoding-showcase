@@ -179,13 +179,15 @@ class CatalogContractTests(unittest.TestCase):
         project["verification"]["sources"] = [project["source_url"] + "#readme"]
         self.assert_has(validate_catalog(data, today=TODAY), "C5")
 
-    def test_renderer_includes_auditable_c_and_d_fields(self) -> None:
+    def test_renderer_includes_all_listing_fields(self) -> None:
         data = self.with_project()
         output = render_catalog(data, "en")
         self.assertIn("<!-- project:contract-test-app -->", output)
-        self.assertIn("Problem (D1)", output)
-        self.assertIn("AI development role (C3 / D4)", output)
-        self.assertIn("Public links (C1 / C2 / D5)", output)
+        self.assertIn("Problem", output)
+        self.assertIn("Core features and value", output)
+        self.assertIn("Main stack", output)
+        self.assertIn("AI involvement", output)
+        self.assertIn("Public links", output)
         self.assertIn("Review issue", output)
 
     def test_renderer_escapes_markdown_in_catalog_text(self) -> None:
@@ -195,17 +197,15 @@ class CatalogContractTests(unittest.TestCase):
         self.assertIn(r"Unsafe \[link\](javascript:alert)", output)
         self.assertNotIn("[link](javascript:alert)", output.replace(r"\[link\]", ""))
 
-    def test_renderer_escapes_block_markdown_in_category_descriptions(self) -> None:
+    def test_renderer_omits_category_descriptions(self) -> None:
         data = self.with_project()
         data["categories"][0]["description"]["en"] = "# Injected heading"
         data["categories"][0]["subcategories"][0]["description"]["en"] = (
             "1. Injected list"
         )
         output = render_catalog(data, "en")
-        self.assertIn(r"\# Injected heading", output)
-        self.assertIn(r"1\. Injected list", output)
-        self.assertNotIn("\n# Injected heading\n", output)
-        self.assertNotIn("\n1. Injected list\n", output)
+        self.assertNotIn("Injected heading", output)
+        self.assertNotIn("Injected list", output)
 
     def test_generated_region_requires_exactly_one_marker_pair(self) -> None:
         with self.assertRaises(ValueError):
