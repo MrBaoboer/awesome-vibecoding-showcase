@@ -1,0 +1,51 @@
+name: Check links
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "23 2 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: links-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  links:
+    name: Links (C1 / C2 / C5 / D5)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check Markdown and catalog links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: >-
+            --no-progress
+            --verbose
+            --max-retries 2
+            --retry-wait-time 2
+            --timeout 20
+            --max-concurrency 32
+            --method get
+            --exclude-private
+            --accept '100..=103,200..=299,429'
+            --root-dir "${{ github.workspace }}"
+            --extensions md,json
+            './**/*.md'
+            './data/**/*.json'
+          fail: true
+          failIfEmpty: false
+          jobSummary: true
+          token: ${{ github.token }}

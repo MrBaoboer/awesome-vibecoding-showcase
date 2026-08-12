@@ -1,0 +1,116 @@
+name: "通用问题 / General issue"
+description: "报告内容错误、链接、分类、翻译或其他仓库问题。 / Report content, link, classification, translation, or repository issues."
+title: "[Issue]: "
+labels:
+  - "status: triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        此表单用于现有内容与仓库事务。新项目提名请使用“项目提交 / Project submission”表单。
+
+        Use this form for existing content and repository matters. To nominate a new project, use the “项目提交 / Project submission” form.
+
+        若问题涉及某个已收录或候选项目，请填写下方项目核验字段；纯文档、翻译或流程问题可留空。
+
+        If the issue concerns a listed or candidate project, complete the project-verification fields below. Leave them blank for documentation, translation, or process-only issues.
+
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: "问题类型 / Issue type"
+      options:
+        - "失效链接 / Broken link"
+        - "事实错误 / Factual error"
+        - "项目更新 / Project update"
+        - "下架建议 / Removal request"
+        - "分类建议 / Classification"
+        - "文档或翻译 / Documentation or translation"
+        - "治理或流程 / Governance or process"
+        - "其他 / Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: "问题说明 / Description"
+      description: "说明当前情况、期望结果和复现步骤，并指出具体位置。 / Describe the current situation, expected outcome, reproduction steps, and exact location."
+      placeholder: |
+        当前情况 / Current situation：
+        期望结果 / Expected outcome：
+        复现步骤或定位信息 / Reproduction steps or location：
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: "证据与参考链接 / Evidence and references"
+      description: "请提供支持修改的公开证据；无法公开时说明原因且不要提交敏感信息。 / Provide public evidence supporting the change; if it cannot be public, explain why without sharing sensitive information."
+      placeholder: "链接、截图说明或可复现结果 / URLs, screenshot notes, or reproducible results"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ### 项目相关信息（如适用）/ Project-related information (if applicable)
+
+        以下字段用于确保涉及项目的更新、纠错或下架请求仍可按 C1–C5 / D1–D5 复核。
+
+        These fields allow project updates, corrections, and removal requests to be re-reviewed against C1–C5 / D1–D5.
+
+  - type: input
+    id: affected_project
+    attributes:
+      label: "涉及的产品 / Affected product（C5，如适用 / if applicable）"
+      placeholder: "项目名称或仓库条目标题 / Project name or listing title"
+
+  - type: input
+    id: public_demo_url
+    attributes:
+      label: "在线体验 / Live product or demo（C1 / D5，如适用）"
+      placeholder: "https://example.com"
+
+  - type: input
+    id: source_repository_url
+    attributes:
+      label: "公开源码 / Public source repository（C2 / D5，如适用）"
+      placeholder: "https://github.com/owner/repository"
+
+  - type: textarea
+    id: problem_features_value
+    attributes:
+      label: "问题、功能与价值 / Problem, features and value（C4 / D1 / D2）"
+      description: "若建议更新产品描述，请给出产品解决的问题、现有核心功能和实际价值。 / For a description update, provide the problem solved, shipped core features, and real value."
+
+  - type: textarea
+    id: tech_stack
+    attributes:
+      label: "主要技术栈 / Main technology stack（D3，如适用）"
+      description: "若技术栈发生变化，请给出公开来源。 / If the stack changed, provide a public source."
+
+  - type: textarea
+    id: ai_role
+    attributes:
+      label: "AI 实质参与及角色 / AI contribution and role（C3 / D4）"
+      description: "说明 AI 工具、参与深度、典型协作方式及公开证据。 / Describe the AI tools, depth of involvement, typical workflow, and public supporting evidence."
+
+  - type: textarea
+    id: authenticity
+    attributes:
+      label: "真实性与可验证性 / Authenticity and verification（C5）"
+      description: "说明事实来源、体验与源码的对应关系，以及如何独立核验本次修改。 / Identify the sources, explain how the live version maps to the source, and show how the change can be independently verified."
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: "提交确认 / Submission confirmation"
+      options:
+        - label: "我已搜索现有 Issue，未发现重复的开放问题。 / I searched existing Issues and found no duplicate open report."
+          required: true
+        - label: "我提供的信息和证据真实、可公开核验（C5）。 / My information and evidence are authentic and publicly verifiable (C5)."
+          required: true
+        - label: "若涉及项目，我已复核 C1–C5 与 D1–D5；否则项目字段可留空。 / For a project issue, I checked C1–C5 and D1–D5; otherwise project fields may be blank."
+          required: true

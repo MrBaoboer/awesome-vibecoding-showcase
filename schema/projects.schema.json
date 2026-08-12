@@ -1,0 +1,499 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Awesome VibeCoding Showcase catalog",
+  "description": "Canonical bilingual catalog for accepted, publicly verifiable applications built substantially with AI.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "categories",
+    "projects"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "../schema/projects.schema.json"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "$ref": "#/$defs/primaryCategory"
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/project"
+      }
+    }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zh-CN",
+        "en"
+      ],
+      "properties": {
+        "zh-CN": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "publicUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "secondaryCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "task-workflow",
+            "communication-collaboration",
+            "personal-productivity",
+            "commerce-sales",
+            "finance-administration",
+            "customer-service",
+            "learning-training",
+            "research-reference",
+            "knowledge-management",
+            "analytics-visualization",
+            "planning-forecasting",
+            "decision-support",
+            "writing-publishing",
+            "design-visual",
+            "audio-video",
+            "health-wellness",
+            "home-daily-life",
+            "travel-local",
+            "civic-public-service",
+            "accessibility-inclusion",
+            "community-nonprofit",
+            "games-interactive",
+            "social-entertainment",
+            "hobbies-fandom"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "description": {
+          "$ref": "#/$defs/localizedText"
+        }
+      }
+    },
+    "primaryCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "description",
+        "subcategories"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "productivity-collaboration",
+            "business-operations",
+            "education-knowledge",
+            "data-decision",
+            "creative-media",
+            "health-lifestyle",
+            "community-public-good",
+            "games-entertainment"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "description": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "subcategories": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/secondaryCategory"
+          }
+        }
+      }
+    },
+    "aiRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tools",
+        "depth",
+        "workflow",
+        "evidence_urls"
+      ],
+      "properties": {
+        "tools": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "depth": {
+          "enum": [
+            "core-code-majority-ai",
+            "natural-language-driven-core"
+          ]
+        },
+        "workflow": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "evidence_urls": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/publicUrl"
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sources",
+        "review_issue_url",
+        "submitter_attested",
+        "verified_on"
+      ],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/publicUrl"
+          }
+        },
+        "review_issue_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://github\\.com/[^/?#]+/Awesome-VibeCoding-Showcase/issues/[1-9][0-9]*$"
+        },
+        "submitter_attested": {
+          "const": true
+        },
+        "verified_on": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        }
+      }
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "name",
+        "primary_category",
+        "secondary_category",
+        "problem",
+        "features",
+        "value",
+        "tech_stack",
+        "ai_role",
+        "demo_url",
+        "source_url",
+        "quality_evidence",
+        "verification",
+        "added_on"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "kind": {
+          "const": "application"
+        },
+        "name": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "primary_category": {
+          "enum": [
+            "productivity-collaboration",
+            "business-operations",
+            "education-knowledge",
+            "data-decision",
+            "creative-media",
+            "health-lifestyle",
+            "community-public-good",
+            "games-entertainment"
+          ]
+        },
+        "secondary_category": {
+          "enum": [
+            "task-workflow",
+            "communication-collaboration",
+            "personal-productivity",
+            "commerce-sales",
+            "finance-administration",
+            "customer-service",
+            "learning-training",
+            "research-reference",
+            "knowledge-management",
+            "analytics-visualization",
+            "planning-forecasting",
+            "decision-support",
+            "writing-publishing",
+            "design-visual",
+            "audio-video",
+            "health-wellness",
+            "home-daily-life",
+            "travel-local",
+            "civic-public-service",
+            "accessibility-inclusion",
+            "community-nonprofit",
+            "games-interactive",
+            "social-entertainment",
+            "hobbies-fandom"
+          ]
+        },
+        "problem": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "features": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/localizedText"
+          }
+        },
+        "value": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "tech_stack": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "ai_role": {
+          "$ref": "#/$defs/aiRole"
+        },
+        "demo_url": {
+          "$ref": "#/$defs/publicUrl"
+        },
+        "source_url": {
+          "$ref": "#/$defs/publicUrl"
+        },
+        "quality_evidence": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "verification": {
+          "$ref": "#/$defs/verification"
+        },
+        "added_on": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "productivity-collaboration"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "task-workflow",
+                  "communication-collaboration",
+                  "personal-productivity"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "business-operations"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "commerce-sales",
+                  "finance-administration",
+                  "customer-service"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "education-knowledge"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "learning-training",
+                  "research-reference",
+                  "knowledge-management"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "data-decision"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "analytics-visualization",
+                  "planning-forecasting",
+                  "decision-support"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "creative-media"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "writing-publishing",
+                  "design-visual",
+                  "audio-video"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "health-lifestyle"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "health-wellness",
+                  "home-daily-life",
+                  "travel-local"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "community-public-good"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "civic-public-service",
+                  "accessibility-inclusion",
+                  "community-nonprofit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "primary_category": {
+                "const": "games-entertainment"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "secondary_category": {
+                "enum": [
+                  "games-interactive",
+                  "social-entertainment",
+                  "hobbies-fandom"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

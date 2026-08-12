@@ -1,0 +1,99 @@
+- name: "submission"
+  color: "1D76DB"
+  description: "新项目提名 / New project submission"
+
+- name: "status: triage"
+  color: "D4C5F9"
+  description: "等待初步分流 / Awaiting triage"
+
+- name: "status: needs-info"
+  color: "F9D0C4"
+  description: "需要提交者补充证据 / More evidence required"
+
+- name: "status: in-review"
+  color: "FBCA04"
+  description: "等待按 C1–C5 / D1–D5 审核 / Awaiting review"
+
+- name: "status: approved"
+  color: "0E8A16"
+  description: "审核通过 / Approved"
+
+- name: "status: listed"
+  color: "2EA44F"
+  description: "已加入成果橱窗 / Listed in the showcase"
+
+- name: "status: declined"
+  color: "B60205"
+  description: "不符合收录标准 / Does not meet criteria"
+
+- name: "status: stale"
+  color: "E4E669"
+  description: "已有条目等待失效复核 / Existing entry awaiting re-review"
+
+- name: "status: removed"
+  color: "D93F0B"
+  description: "条目已下架 / Entry removed"
+
+- name: "content: update"
+  color: "0052CC"
+  description: "更新已有项目内容 / Update an existing entry"
+
+- name: "broken-link"
+  color: "BFDADC"
+  description: "体验或源码链接失效 / Broken demo or source link"
+
+- name: "documentation"
+  color: "0075CA"
+  description: "文档改进 / Documentation"
+
+- name: "i18n"
+  color: "5319E7"
+  description: "中英文内容同步 / Localization"
+
+- name: "dispute"
+  color: "C2E0C6"
+  description: "收录或下架争议 / Listing dispute"
+
+- name: "duplicate"
+  color: "CFD3D7"
+  description: "重复的 Issue、PR 或项目 / Duplicate"
+
+- name: "good first issue"
+  color: "7057FF"
+  description: "适合首次贡献 / Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "欢迎社区协助 / Community help welcome"
+
+- name: "category: productivity-collaboration"
+  color: "BFD4F2"
+  description: "生产力与协作 / Productivity & collaboration"
+
+- name: "category: business-operations"
+  color: "BFD4F2"
+  description: "商业与运营 / Business & operations"
+
+- name: "category: education-knowledge"
+  color: "BFD4F2"
+  description: "教育与知识 / Education & knowledge"
+
+- name: "category: data-decision"
+  color: "BFD4F2"
+  description: "数据与决策 / Data & decision"
+
+- name: "category: creative-media"
+  color: "BFD4F2"
+  description: "创意与媒体 / Creative & media"
+
+- name: "category: health-lifestyle"
+  color: "BFD4F2"
+  description: "健康与生活 / Health & lifestyle"
+
+- name: "category: community-public-good"
+  color: "BFD4F2"
+  description: "社区与公共利益 / Community & public good"
+
+- name: "category: games-entertainment"
+  color: "BFD4F2"
+  description: "游戏与娱乐 / Games & entertainment"

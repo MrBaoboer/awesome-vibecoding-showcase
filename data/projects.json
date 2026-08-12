@@ -1,0 +1,375 @@
+{
+  "$schema": "../schema/projects.schema.json",
+  "schema_version": 1,
+  "categories": [
+    {
+      "id": "productivity-collaboration",
+      "name": {
+        "zh-CN": "生产力与协作",
+        "en": "Productivity & Collaboration"
+      },
+      "description": {
+        "zh-CN": "帮助个人或团队更高效地组织任务、沟通信息或完成日常知识工作。",
+        "en": "Applications that help individuals or teams organize tasks, communicate, and complete knowledge work more efficiently."
+      },
+      "subcategories": [
+        {
+          "id": "task-workflow",
+          "name": {
+            "zh-CN": "任务与流程",
+            "en": "Task & Workflow"
+          },
+          "description": {
+            "zh-CN": "围绕待办、项目计划、审批、日程或重复工作流的执行。",
+            "en": "Applications for executing to-dos, project plans, approvals, schedules, or recurring workflows."
+          }
+        },
+        {
+          "id": "communication-collaboration",
+          "name": {
+            "zh-CN": "沟通与协作",
+            "en": "Communication & Collaboration"
+          },
+          "description": {
+            "zh-CN": "围绕团队沟通、会议协作、异步协作或共同编辑。",
+            "en": "Applications for team communication, meeting collaboration, asynchronous collaboration, or co-editing."
+          }
+        },
+        {
+          "id": "personal-productivity",
+          "name": {
+            "zh-CN": "个人生产力",
+            "en": "Personal Productivity"
+          },
+          "description": {
+            "zh-CN": "围绕个人笔记、专注、时间管理或个人信息组织。",
+            "en": "Applications for personal notes, focus, time management, or personal information organization."
+          }
+        }
+      ]
+    },
+    {
+      "id": "business-operations",
+      "name": {
+        "zh-CN": "商业与运营",
+        "en": "Business & Operations"
+      },
+      "description": {
+        "zh-CN": "服务企业经营活动或特定业务职能，主要价值对应获客、交易、财务、交付或客户支持。",
+        "en": "Applications serving business operations or specific functions such as acquisition, commerce, finance, delivery, or customer support."
+      },
+      "subcategories": [
+        {
+          "id": "commerce-sales",
+          "name": {
+            "zh-CN": "商务与销售",
+            "en": "Commerce & Sales"
+          },
+          "description": {
+            "zh-CN": "电商经营、线索管理、销售推进、报价或交易流程。",
+            "en": "Applications for e-commerce, lead management, sales progression, quotes, or transaction workflows."
+          }
+        },
+        {
+          "id": "finance-administration",
+          "name": {
+            "zh-CN": "财务与行政",
+            "en": "Finance & Administration"
+          },
+          "description": {
+            "zh-CN": "预算、账务、报销、合同、采购或企业行政流程。",
+            "en": "Applications for budgets, accounting, expenses, contracts, procurement, or business administration."
+          }
+        },
+        {
+          "id": "customer-service",
+          "name": {
+            "zh-CN": "客户服务",
+            "en": "Customer Service"
+          },
+          "description": {
+            "zh-CN": "客服受理、工单、自助服务、客户成功或售后流程。",
+            "en": "Applications for support intake, tickets, self-service, customer success, or after-sales workflows."
+          }
+        }
+      ]
+    },
+    {
+      "id": "education-knowledge",
+      "name": {
+        "zh-CN": "教育与知识",
+        "en": "Education & Knowledge"
+      },
+      "description": {
+        "zh-CN": "帮助用户学习、教学、研究、查阅或沉淀知识。",
+        "en": "Applications that help users learn, teach, research, reference, or preserve knowledge."
+      },
+      "subcategories": [
+        {
+          "id": "learning-training",
+          "name": {
+            "zh-CN": "学习与训练",
+            "en": "Learning & Training"
+          },
+          "description": {
+            "zh-CN": "课程、练习、测评、辅导、职业训练或技能培养。",
+            "en": "Applications for courses, practice, assessment, tutoring, vocational training, or skill development."
+          }
+        },
+        {
+          "id": "research-reference",
+          "name": {
+            "zh-CN": "研究与参考",
+            "en": "Research & Reference"
+          },
+          "description": {
+            "zh-CN": "文献查阅、资料探索、事实参考或研究过程支持。",
+            "en": "Applications for literature review, source exploration, factual reference, or research support."
+          }
+        },
+        {
+          "id": "knowledge-management",
+          "name": {
+            "zh-CN": "知识管理",
+            "en": "Knowledge Management"
+          },
+          "description": {
+            "zh-CN": "知识采集、组织、检索、关联或团队知识库。",
+            "en": "Applications for capturing, organizing, retrieving, linking, or sharing team knowledge."
+          }
+        }
+      ]
+    },
+    {
+      "id": "data-decision",
+      "name": {
+        "zh-CN": "数据与决策",
+        "en": "Data & Decision"
+      },
+      "description": {
+        "zh-CN": "把数据转化为洞察、预测、计划或可执行选择。",
+        "en": "Applications that turn data into insight, forecasts, plans, or actionable choices."
+      },
+      "subcategories": [
+        {
+          "id": "analytics-visualization",
+          "name": {
+            "zh-CN": "分析与可视化",
+            "en": "Analytics & Visualization"
+          },
+          "description": {
+            "zh-CN": "指标分析、探索、报告、图表或数据叙事。",
+            "en": "Applications for metric analysis, exploration, reporting, charts, or data storytelling."
+          }
+        },
+        {
+          "id": "planning-forecasting",
+          "name": {
+            "zh-CN": "规划与预测",
+            "en": "Planning & Forecasting"
+          },
+          "description": {
+            "zh-CN": "预测、情景模拟、资源规划或目标规划。",
+            "en": "Applications for forecasting, scenario simulation, resource planning, or goal planning."
+          }
+        },
+        {
+          "id": "decision-support",
+          "name": {
+            "zh-CN": "决策支持",
+            "en": "Decision Support"
+          },
+          "description": {
+            "zh-CN": "比较方案、推荐行动、风险评估或结构化取舍。",
+            "en": "Applications for comparing options, recommending actions, assessing risk, or structuring trade-offs."
+          }
+        }
+      ]
+    },
+    {
+      "id": "creative-media",
+      "name": {
+        "zh-CN": "创意与媒体",
+        "en": "Creative & Media"
+      },
+      "description": {
+        "zh-CN": "帮助用户创作、编辑、发布或管理可消费的文字、视觉、音频或视频内容。",
+        "en": "Applications that help users create, edit, publish, or manage written, visual, audio, or video content."
+      },
+      "subcategories": [
+        {
+          "id": "writing-publishing",
+          "name": {
+            "zh-CN": "写作与出版",
+            "en": "Writing & Publishing"
+          },
+          "description": {
+            "zh-CN": "长短文本创作、编辑、排版、出版或内容运营。",
+            "en": "Applications for long- or short-form writing, editing, layout, publishing, or content operations."
+          }
+        },
+        {
+          "id": "design-visual",
+          "name": {
+            "zh-CN": "设计与视觉",
+            "en": "Design & Visual"
+          },
+          "description": {
+            "zh-CN": "图形设计、插画、摄影处理、视觉叙事或品牌素材。",
+            "en": "Applications for graphic design, illustration, photo processing, visual storytelling, or brand assets."
+          }
+        },
+        {
+          "id": "audio-video",
+          "name": {
+            "zh-CN": "音频与视频",
+            "en": "Audio & Video"
+          },
+          "description": {
+            "zh-CN": "音乐、播客、语音、动画、视频创作或后期制作。",
+            "en": "Applications for music, podcasts, speech, animation, video creation, or post-production."
+          }
+        }
+      ]
+    },
+    {
+      "id": "health-lifestyle",
+      "name": {
+        "zh-CN": "健康与生活",
+        "en": "Health & Lifestyle"
+      },
+      "description": {
+        "zh-CN": "面向个人健康、日常生活、家庭管理、出行或本地生活。",
+        "en": "Applications for personal health, everyday life, household management, travel, or local life."
+      },
+      "subcategories": [
+        {
+          "id": "health-wellness",
+          "name": {
+            "zh-CN": "健康与身心",
+            "en": "Health & Wellness"
+          },
+          "description": {
+            "zh-CN": "健身、睡眠、饮食、习惯、心理支持或健康信息管理。",
+            "en": "Applications for fitness, sleep, nutrition, habits, mental support, or health information management."
+          }
+        },
+        {
+          "id": "home-daily-life",
+          "name": {
+            "zh-CN": "家庭与日常",
+            "en": "Home & Daily Life"
+          },
+          "description": {
+            "zh-CN": "家务、物品、饮食、家庭安排或个人日常服务。",
+            "en": "Applications for chores, belongings, food, household scheduling, or personal daily services."
+          }
+        },
+        {
+          "id": "travel-local",
+          "name": {
+            "zh-CN": "旅行与本地",
+            "en": "Travel & Local"
+          },
+          "description": {
+            "zh-CN": "行程、本地探索、地点服务或旅行体验。",
+            "en": "Applications for itineraries, local discovery, location services, or travel experiences."
+          }
+        }
+      ]
+    },
+    {
+      "id": "community-public-good",
+      "name": {
+        "zh-CN": "社区与公共利益",
+        "en": "Community & Public Good"
+      },
+      "description": {
+        "zh-CN": "服务社区协作、公民参与、公益行动、可访问性或公共资源。",
+        "en": "Applications serving community collaboration, civic participation, public-interest action, accessibility, or public resources."
+      },
+      "subcategories": [
+        {
+          "id": "civic-public-service",
+          "name": {
+            "zh-CN": "公民与公共服务",
+            "en": "Civic & Public Service"
+          },
+          "description": {
+            "zh-CN": "公共信息、政务参与、社区治理或公共资源使用。",
+            "en": "Applications for public information, civic participation, community governance, or public resource access."
+          }
+        },
+        {
+          "id": "accessibility-inclusion",
+          "name": {
+            "zh-CN": "无障碍与包容",
+            "en": "Accessibility & Inclusion"
+          },
+          "description": {
+            "zh-CN": "降低能力、语言、经济或环境障碍，扩大平等参与。",
+            "en": "Applications that reduce ability, language, economic, or environmental barriers to equal participation."
+          }
+        },
+        {
+          "id": "community-nonprofit",
+          "name": {
+            "zh-CN": "社区与公益",
+            "en": "Community & Nonprofit"
+          },
+          "description": {
+            "zh-CN": "志愿协作、公益项目、互助网络或非营利服务。",
+            "en": "Applications for volunteer collaboration, public-interest projects, mutual-aid networks, or nonprofit services."
+          }
+        }
+      ]
+    },
+    {
+      "id": "games-entertainment",
+      "name": {
+        "zh-CN": "游戏与娱乐",
+        "en": "Games & Entertainment"
+      },
+      "description": {
+        "zh-CN": "主要价值来自游戏规则、互动体验、社交娱乐或兴趣消费。",
+        "en": "Applications whose main value comes from game rules, interactive experiences, social entertainment, or hobbies."
+      },
+      "subcategories": [
+        {
+          "id": "games-interactive",
+          "name": {
+            "zh-CN": "游戏与互动体验",
+            "en": "Games & Interactive Experiences"
+          },
+          "description": {
+            "zh-CN": "有明确互动规则、挑战、叙事选择或游戏循环。",
+            "en": "Applications with explicit interaction rules, challenges, narrative choices, or gameplay loops."
+          }
+        },
+        {
+          "id": "social-entertainment",
+          "name": {
+            "zh-CN": "社交娱乐",
+            "en": "Social Entertainment"
+          },
+          "description": {
+            "zh-CN": "以轻松互动、共同观看、表演或娱乐社交为主。",
+            "en": "Applications centered on casual interaction, shared viewing, performance, or entertainment-oriented social activity."
+          }
+        },
+        {
+          "id": "hobbies-fandom",
+          "name": {
+            "zh-CN": "兴趣与爱好",
+            "en": "Hobbies & Fandom"
+          },
+          "description": {
+            "zh-CN": "服务收藏、爱好活动、粉丝文化或休闲探索。",
+            "en": "Applications for collecting, hobby activities, fandom, or leisure exploration."
+          }
+        }
+      ]
+    }
+  ],
+  "projects": []
+}

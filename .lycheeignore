@@ -1,0 +1,5 @@
+# Documentation-only placeholders; real catalog entries reject these hosts.
+^https?://(www\.)?example\.(com|org|net)(/|$)
+^https?://localhost(?::[0-9]+)?(/|$)
+^https?://127\.0\.0\.1(?::[0-9]+)?(/|$)
+^https://github\.com/(OWNER|your-org)/(REPO|your-repo)(/|$)
