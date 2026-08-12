@@ -64,17 +64,22 @@ def _form_labels(document: str) -> set[str]:
 def validate_repository() -> list[str]:
     errors: list[str] = []
 
-    if (ROOT / "LICENSE").exists():
-        errors.append(
-            "root LICENSE must not contain the dual-license explanation; "
-            "use LICENSING.md so GitHub does not report an unknown third license"
-        )
-    for license_path in ("LICENSING.md", "LICENSE-CODE", "LICENSE-CONTENT"):
+    for license_path in ("LICENSE", "LICENSING.md", "LICENSE-CONTENT"):
         if not (ROOT / license_path).is_file():
             errors.append(f"required licensing file is missing: {license_path}")
+    if (ROOT / "LICENSE-CODE").exists():
+        errors.append("legacy LICENSE-CODE must be removed; the standard MIT text belongs in LICENSE")
+    mit_license = read("LICENSE") if (ROOT / "LICENSE").is_file() else ""
+    for required_text in (
+        "MIT License",
+        "Permission is hereby granted, free of charge",
+        'THE SOFTWARE IS PROVIDED "AS IS"',
+    ):
+        if required_text not in mit_license:
+            errors.append(f"root LICENSE is missing standard MIT text: {required_text!r}")
     for readme_path in ("README.md", "README.en.md"):
         readme = read(readme_path)
-        for target in ("LICENSING.md", "LICENSE-CODE", "LICENSE-CONTENT"):
+        for target in ("LICENSE", "LICENSING.md", "LICENSE-CONTENT"):
             if f"({target})" not in readme:
                 errors.append(f"{readme_path} must link to {target}")
 
