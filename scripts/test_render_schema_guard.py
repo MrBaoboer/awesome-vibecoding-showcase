@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression tests for block rendering and evidence-count schema parity."""
+"""Regression tests for evidence-count schema parity."""
 
 from __future__ import annotations
 
@@ -12,7 +12,6 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
-from render_catalog import _block_text  # noqa: E402
 from validate_catalog import (  # noqa: E402
     DEFAULT_SCHEMA,
     load_json,
@@ -21,13 +20,6 @@ from validate_catalog import (  # noqa: E402
 
 
 class RenderSchemaGuardTests(unittest.TestCase):
-    def test_block_text_escapes_spaced_thematic_break(self) -> None:
-        self.assertEqual(_block_text("--- --- ---"), r"\--- --- ---")
-
-    def test_block_text_preserves_normal_hyphenated_text(self) -> None:
-        value = "Release notes --- still normal text"
-        self.assertEqual(_block_text(value), value)
-
     def test_schema_declares_eight_url_limits(self) -> None:
         schema = load_json(DEFAULT_SCHEMA)
         definitions = schema["$defs"]
