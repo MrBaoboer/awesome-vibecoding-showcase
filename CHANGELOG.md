@@ -13,7 +13,7 @@ All notable repository, policy, and catalog changes are recorded here. Project a
 
 ### Fixed
 
-- Moved the dual-license explanation to `LICENSING.md` and restored the standard MIT text at root `LICENSE`, so GitHub can identify the repository license without reporting an unknown third license.
+- Restored the standard MIT text at root `LICENSE` and moved path-specific CC BY terms and the dual-license explanation to `CONTENT-LICENSING.md` and `LICENSING.md`, so GitHub can identify MIT without reporting an unknown multi-license result.
 
 ## [0.1.0] - 2026-08-12
 

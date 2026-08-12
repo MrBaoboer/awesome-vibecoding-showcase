@@ -1,7 +1,7 @@
 # Awesome VibeCoding Showcase
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Content: CC BY 4.0](https://img.shields.io/badge/content-CC_BY_4.0-blue.svg)](LICENSE-CONTENT)
+[![Content: CC BY 4.0](https://img.shields.io/badge/content-CC_BY_4.0-blue.svg)](CONTENT-LICENSING.md)
 [![Code: MIT](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
 
 **A showcase of excellent applications built through Vibe Coding.** We list only complete products that are publicly usable, have public source code, and were substantially implemented with AI.
@@ -103,7 +103,7 @@ Contributions can fix broken links, improve bilingual copy, add verifiable evide
 
 ## License
 
-- READMEs, project metadata, and documentation: [`CC BY 4.0`](LICENSE-CONTENT);
+- READMEs, project metadata, and documentation: [`CC BY 4.0`](CONTENT-LICENSING.md);
 - validation scripts and GitHub automation: [`MIT`](LICENSE);
 - `CODE_OF_CONDUCT*`: `CC BY-SA 4.0`, following Contributor Covenant 3.0.
 

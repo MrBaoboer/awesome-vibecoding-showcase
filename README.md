@@ -1,7 +1,7 @@
 # Awesome VibeCoding Showcase｜Vibe Coding 优秀应用成果橱窗
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-[![Content: CC BY 4.0](https://img.shields.io/badge/content-CC_BY_4.0-blue.svg)](LICENSE-CONTENT)
+[![Content: CC BY 4.0](https://img.shields.io/badge/content-CC_BY_4.0-blue.svg)](CONTENT-LICENSING.md)
 [![Code: MIT](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
 
 **Vibe Coding 优秀应用成果橱窗。**这里只收录 AI 实质参与主体开发、可公开体验且源码公开的完整产品。
@@ -103,7 +103,7 @@ _暂无收录项目。_
 
 ## 许可证
 
-- README、项目元数据与说明文档：[`CC BY 4.0`](LICENSE-CONTENT)；
+- README、项目元数据与说明文档：[`CC BY 4.0`](CONTENT-LICENSING.md)；
 - 校验脚本与 GitHub 自动化：[`MIT`](LICENSE)；
 - `CODE_OF_CONDUCT*`：`CC BY-SA 4.0`，沿用 Contributor Covenant 3.0 的授权。
 
